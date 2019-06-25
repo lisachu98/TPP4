@@ -24,33 +24,44 @@ namespace TPP4
             public int y;
             public int maxWaga;
         }
-        List<Bloczek> Bloki = new List<Bloczek>();
+        int dzwigWysokosc = 450;
+        int dzwigSzerokosc = 10;
+        int dzwigDlugosc = 500;
+        int bloczekRozmiar = 40;
+        int hakRozmiar = 5;
+        List<Bloczek> bloki = new List<Bloczek>();
         Hak hak;
         public Form1()
         {
             InitializeComponent();
-            int dzwigWysokosc = 450;
-            int dzwigSzerokosc = 10;
-            int dzwigDlugosc = 500;
-            int bloczekRozmiar = 50;
-            int hakRozmiar = 5;
+            
             hak.x = 75;
             hak.y = 150;
             int[] wagi = { 10, 50, 20, 30, 100, 15, 40, 40, 10};
             for(int i = 0; i < 9; i++)
             {
                 Bloczek bloczek = new Bloczek();
-                bloczek.x = 50 + i * 50 + i * 10;
+                bloczek.x = 70 + i * bloczekRozmiar + i * 10;
                 bloczek.y = panel1.Height - bloczekRozmiar;
                 bloczek.waga = wagi[i];
-                Bloki.Add(bloczek);
+                bloki.Add(bloczek);
             }
             panel1.Refresh();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
+        {   
+            System.Drawing.SolidBrush pen = new System.Drawing.SolidBrush(System.Drawing.Color.Orange);
+            Graphics g = panel1.CreateGraphics();
+            g.FillRectangle(pen, new Rectangle(panel1.Width / 5 - dzwigSzerokosc - 50, panel1.Height - dzwigWysokosc, dzwigSzerokosc, dzwigWysokosc));
+            g.FillRectangle(pen, new Rectangle(panel1.Width / 5 - dzwigSzerokosc - 100, panel1.Height - dzwigWysokosc + 50, dzwigDlugosc, dzwigSzerokosc));
+            g.FillRectangle(pen, new Rectangle(hak.x + 4, panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc, 2, hak.y - (panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc)));
+            pen = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            g.FillRectangle(pen, new Rectangle(hak.x-5, panel1.Height - dzwigWysokosc + 50, dzwigSzerokosc, dzwigSzerokosc));
+            pen = new System.Drawing.SolidBrush(System.Drawing.Color.Yellow);
+            g.FillRectangle(pen, new Rectangle(hak.x, hak.y, hakRozmiar, hakRozmiar));
+            pen = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+            for (int i = 0; i < bloki.Count; i++) g.FillRectangle(pen, new Rectangle(bloki[i].x, bloki[i].y, bloczekRozmiar, bloczekRozmiar));
         }
 
         private void Form1_Load(object sender, EventArgs e)
