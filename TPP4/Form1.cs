@@ -28,15 +28,15 @@ namespace TPP4
         int dzwigSzerokosc = 10;
         int dzwigDlugosc = 500;
         int bloczekRozmiar = 40;
-        int hakRozmiar = 5;
+        int hakRozmiar = 6;
         List<Bloczek> bloki = new List<Bloczek>();
         Hak hak;
         public Form1()
         {
             InitializeComponent();
             
-            hak.x = 75;
-            hak.y = 150;
+            hak.x = 72;
+            hak.y = 210;
             int[] wagi = { 10, 50, 20, 30, 100, 15, 40, 40, 10};
             for(int i = 0; i < 9; i++)
             {
@@ -57,7 +57,7 @@ namespace TPP4
             g.FillRectangle(pen, new Rectangle(panel1.Width / 5 - dzwigSzerokosc - 100, panel1.Height - dzwigWysokosc + 50, dzwigDlugosc, dzwigSzerokosc));
             g.FillRectangle(pen, new Rectangle(hak.x + 4, panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc, 2, hak.y - (panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc)));
             pen = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-            g.FillRectangle(pen, new Rectangle(hak.x-5, panel1.Height - dzwigWysokosc + 50, dzwigSzerokosc, dzwigSzerokosc));
+            g.FillRectangle(pen, new Rectangle(hak.x-2, panel1.Height - dzwigWysokosc + 50, dzwigSzerokosc, dzwigSzerokosc));
             pen = new System.Drawing.SolidBrush(System.Drawing.Color.Yellow);
             g.FillRectangle(pen, new Rectangle(hak.x, hak.y, hakRozmiar, hakRozmiar));
             pen = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
