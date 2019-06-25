@@ -128,5 +128,23 @@ namespace TPP4
             else hak.y -= 10;
             panel1.Refresh();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (button5.Text == "Chwyc")
+            {
+                hak.idBloczka = kolizjeHakBlok();
+                if (hak.idBloczka != -1)
+                {
+                    if (bloki[hak.idBloczka].waga > hak.maxWaga)
+                    {
+                        label2.Text = "Ten bloczek jest za ciezki. " + bloki[hak.idBloczka].waga.ToString() + " Sprobuj inny bloczek.";
+                        hak.idBloczka = -1;
+                    }
+                    else button5.Text = "Odloz";
+                }
+            }
+            else button5.Text = "Chwyc";
+        }
     }
 }
