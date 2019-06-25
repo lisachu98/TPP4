@@ -101,7 +101,11 @@ namespace TPP4
         {
             label1.Text = " ";
             if (hak.x - 2 <= panel1.Width / 5 - 50) hak.x = panel1.Width / 5 - 48;
-            else hak.x -= 10;
+            else
+            {
+                hak.x -= 10;
+                ruchBloczka(-10, 1);
+            }
             panel1.Refresh();
         }
 
@@ -109,7 +113,11 @@ namespace TPP4
         {
             label1.Text = " ";
             if (hak.x-2 >= dzwigDlugosc - 70 - hakRozmiar + panel1.Width / 5) hak.x  = dzwigDlugosc - 62 - hakRozmiar + panel1.Width / 5;
-            else hak.x += 10;
+            else
+            {
+                hak.x += 10;
+                ruchBloczka(+10, 1);
+            }
             panel1.Refresh();
         }
 
@@ -117,7 +125,11 @@ namespace TPP4
         {
             label1.Text = " ";
             if (hak.y >= panel1.Height - hakRozmiar) hak.y = panel1.Height - hakRozmiar;
-            else hak.y += 10;
+            else
+            {
+                hak.y += 10;
+                ruchBloczka(+10, 0);
+            }
             panel1.Refresh();
         }
 
@@ -125,7 +137,11 @@ namespace TPP4
         {
             label1.Text = " ";
             if (hak.y <= panel1.Height - dzwigWysokosc + hakRozmiar + 54) hak.y = panel1.Height - dzwigWysokosc + hakRozmiar + 54;
-            else hak.y -= 10;
+            else
+            {
+                hak.y -= 10;
+                ruchBloczka(-10, 0);
+            }
             panel1.Refresh();
         }
 
@@ -138,13 +154,28 @@ namespace TPP4
                 {
                     if (bloki[hak.idBloczka].waga > hak.maxWaga)
                     {
-                        label2.Text = "Ten bloczek jest za ciezki. " + bloki[hak.idBloczka].waga.ToString() + " Sprobuj inny bloczek.";
+                        label2.Text = "Ten bloczek jest za ciezki. (" + bloki[hak.idBloczka].waga.ToString() + ") Sprobuj inny bloczek.";
                         hak.idBloczka = -1;
                     }
                     else button5.Text = "Odloz";
                 }
             }
-            else button5.Text = "Chwyc";
+            else
+            {
+                hak.idBloczka = -1;
+                button5.Text = "Chwyc";
+            }
+        }
+
+        private void ruchBloczka(int xy, int d)
+        {
+            if (hak.idBloczka != -1)
+            {
+                Bloczek bloczek = bloki[hak.idBloczka];
+                if (d == 1) bloczek.x += xy;
+                else bloczek.y += xy;
+                bloki[hak.idBloczka] = bloczek;
+            }
         }
     }
 }
