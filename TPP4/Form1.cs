@@ -162,9 +162,25 @@ namespace TPP4
             }
             else
             {
-                hak.idBloczka = -1;
-                button5.Text = "Chwyc";
+                int dol = spadanieBloczka();
+                if (dol != -1)
+                {
+                    Bloczek bloczek = bloki[hak.idBloczka];
+                    bloczek.y = spadanieBloczka() - bloczekRozmiar;
+                    bloki[hak.idBloczka] = bloczek;
+                    hak.idBloczka = -1;
+                    button5.Text = "Chwyc";
+                }
+                else
+                {
+                    Bloczek bloczek = bloki[hak.idBloczka];
+                    bloczek.y = panel1.Height-bloczekRozmiar;
+                    bloki[hak.idBloczka] = bloczek;
+                    hak.idBloczka = -1;
+                    button5.Text = "Chwyc";
+                }
             }
+            panel1.Refresh();
         }
 
         private void ruchBloczka(int xy, int d)
@@ -199,6 +215,16 @@ namespace TPP4
                 }
                 bloki[hak.idBloczka] = bloczek;
             }
+        }
+
+        private int spadanieBloczka()
+        {
+            for (int i = 0; i < bloki.Count; i++)
+            {
+                if (i == hak.idBloczka) i++;
+                if (i != bloki.Count && bloki[hak.idBloczka].x + bloczekRozmiar > bloki[i].x && bloki[hak.idBloczka].x < bloki[i].x + bloczekRozmiar ) return bloki[i].y;
+            }
+            return -1;
         }
     }
 }
