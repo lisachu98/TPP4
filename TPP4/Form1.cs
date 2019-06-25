@@ -60,13 +60,13 @@ namespace TPP4
             Graphics g = panel1.CreateGraphics();
             g.FillRectangle(pen, new Rectangle(panel1.Width / 5 - dzwigSzerokosc - 50, panel1.Height - dzwigWysokosc, dzwigSzerokosc, dzwigWysokosc));
             g.FillRectangle(pen, new Rectangle(panel1.Width / 5 - dzwigSzerokosc - 50, panel1.Height - dzwigWysokosc + 50, dzwigDlugosc, dzwigSzerokosc));
+            pen = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+            for (int i = 0; i < bloki.Count; i++) g.FillRectangle(pen, new Rectangle(bloki[i].x, bloki[i].y, bloczekRozmiar, bloczekRozmiar));
             pen = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
             g.FillRectangle(pen, new Rectangle(hak.x + 2, panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc, 2, hak.y - (panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc)));
             g.FillRectangle(pen, new Rectangle(hak.x-2, panel1.Height - dzwigWysokosc + 50, dzwigSzerokosc, dzwigSzerokosc));
             pen = new System.Drawing.SolidBrush(System.Drawing.Color.Yellow);
             g.FillRectangle(pen, new Rectangle(hak.x, hak.y, hakRozmiar, hakRozmiar));
-            pen = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
-            for (int i = 0; i < bloki.Count; i++) g.FillRectangle(pen, new Rectangle(bloki[i].x, bloki[i].y, bloczekRozmiar, bloczekRozmiar));
             pen.Dispose();
             g.Dispose();
         }
