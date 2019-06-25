@@ -60,8 +60,8 @@ namespace TPP4
             Graphics g = panel1.CreateGraphics();
             g.FillRectangle(pen, new Rectangle(panel1.Width / 5 - dzwigSzerokosc - 50, panel1.Height - dzwigWysokosc, dzwigSzerokosc, dzwigWysokosc));
             g.FillRectangle(pen, new Rectangle(panel1.Width / 5 - dzwigSzerokosc - 50, panel1.Height - dzwigWysokosc + 50, dzwigDlugosc, dzwigSzerokosc));
-            g.FillRectangle(pen, new Rectangle(hak.x + 4, panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc, 2, hak.y - (panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc)));
             pen = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            g.FillRectangle(pen, new Rectangle(hak.x + 2, panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc, 2, hak.y - (panel1.Height - dzwigWysokosc + 50 + dzwigSzerokosc)));
             g.FillRectangle(pen, new Rectangle(hak.x-2, panel1.Height - dzwigWysokosc + 50, dzwigSzerokosc, dzwigSzerokosc));
             pen = new System.Drawing.SolidBrush(System.Drawing.Color.Yellow);
             g.FillRectangle(pen, new Rectangle(hak.x, hak.y, hakRozmiar, hakRozmiar));
@@ -99,18 +99,33 @@ namespace TPP4
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
+            label1.Text = " ";
+            if (hak.x - 2 <= panel1.Width / 5 - 50) hak.x = panel1.Width / 5 - 48;
+            else hak.x -= 10;
+            panel1.Refresh();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
-            hak.x += 10;
+            label1.Text = " ";
+            if (hak.x-2 >= dzwigDlugosc - 70 - hakRozmiar + panel1.Width / 5) hak.x  = dzwigDlugosc - 62 - hakRozmiar + panel1.Width / 5;
+            else hak.x += 10;
+            panel1.Refresh();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            label1.Text = " ";
+            if (hak.y >= panel1.Height - hakRozmiar) hak.y = panel1.Height - hakRozmiar;
+            else hak.y += 10;
+            panel1.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            label1.Text = " ";
+            if (hak.y <= panel1.Height - dzwigWysokosc + hakRozmiar + 54) hak.y = panel1.Height - dzwigWysokosc + hakRozmiar + 54;
+            else hak.y -= 10;
             panel1.Refresh();
         }
     }
