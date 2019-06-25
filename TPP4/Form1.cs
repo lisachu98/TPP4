@@ -40,7 +40,7 @@ namespace TPP4
             hak.y = 210;
             hak.idBloczka = -1;
             hak.maxWaga = 30;
-            textBox1.Text = hak.maxWaga.ToString();
+            label1.Text = "Maksymalna waga: " + hak.maxWaga.ToString();
             
             int[] wagi = { 10, 50, 20, 30, 100, 15, 40, 40, 10};
             for(int i = 0; i < 9; i++)
@@ -99,7 +99,7 @@ namespace TPP4
 
         private void button4_Click(object sender, EventArgs e)
         {
-            label1.Text = " ";
+            label2.Text = " ";
             if (hak.x - 2 <= panel1.Width / 5 - 50) hak.x = panel1.Width / 5 - 48;
             else
             {
@@ -111,36 +111,36 @@ namespace TPP4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            label1.Text = " ";
+            label2.Text = " ";
             if (hak.x-2 >= dzwigDlugosc - 70 - hakRozmiar + panel1.Width / 5) hak.x  = dzwigDlugosc - 62 - hakRozmiar + panel1.Width / 5;
             else
             {
                 hak.x += 10;
-                ruchBloczka(+10, 1);
+                ruchBloczka(10, 1);
             }
             panel1.Refresh();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            label1.Text = " ";
+            label2.Text = " ";
             if (hak.y >= panel1.Height - hakRozmiar) hak.y = panel1.Height - hakRozmiar;
             else
             {
-                hak.y += 10;
-                ruchBloczka(+10, 0);
+                hak.y += 20;
+                ruchBloczka(20, 0);
             }
             panel1.Refresh();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = " ";
+            label2.Text = " ";
             if (hak.y <= panel1.Height - dzwigWysokosc + hakRozmiar + 54) hak.y = panel1.Height - dzwigWysokosc + hakRozmiar + 54;
             else
             {
-                hak.y -= 10;
-                ruchBloczka(-10, 0);
+                hak.y -= 20;
+                ruchBloczka(-20, 0);
             }
             panel1.Refresh();
         }
@@ -172,8 +172,31 @@ namespace TPP4
             if (hak.idBloczka != -1)
             {
                 Bloczek bloczek = bloki[hak.idBloczka];
-                if (d == 1) bloczek.x += xy;
-                else bloczek.y += xy;
+                if (d == 1)
+                {
+                    bloczek.x += xy;
+                    int kolizja = kolizjeBlokBlok(bloczek);
+                    if (kolizja != -1)
+                    {
+                        bloczek.x -= xy;
+                        hak.x -= xy;
+                    }
+                }
+                else
+                {
+                    bloczek.y += xy;
+                    int kolizja = kolizjeBlokBlok(bloczek);
+                    if (kolizja != -1)
+                    {
+                        bloczek.y -= xy;
+                        hak.y -= xy;
+                    }
+                    if(bloczekRozmiar + bloczek.y > panel1.Height)
+                    {
+                        bloczek.y = panel1.Height - bloczekRozmiar;
+                        hak.y -= xy;
+                    }
+                }
                 bloki[hak.idBloczka] = bloczek;
             }
         }
